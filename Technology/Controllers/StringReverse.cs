@@ -8,8 +8,18 @@ namespace Technology.Controllers
     [ApiController, Route("[controller]")]
     public class StringReverse : ControllerBase
     {
-        [HttpPost]
-        public IActionResult Post(string input, string sortType = "quick")
+        /// <summary>
+        /// Reverses a string
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="sortType">
+        /// <remarks>
+        /// SortType can be 'quick' or 'tree'
+        /// </remarks>
+        /// </param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult Get(string input, string sortType = "quick")
         {
             char[] count = Validation.WrongLetters(input).ToArray();
             try
