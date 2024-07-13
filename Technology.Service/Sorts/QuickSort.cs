@@ -10,7 +10,9 @@ namespace Technology.Service.Sorts
     {
         public static string Sort(string data)
         {
-            return QSort(data.ToCharArray(), 0, data.Length - 1);
+            char[] array = data.ToCharArray();
+            Array.Copy(data.ToCharArray(), array, data.Length - 1);
+            return QSort(array, 0, data.Length - 1);
         }
         public static string QSort(char[] array, int minIndex, int maxIndex)
         {

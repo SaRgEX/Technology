@@ -22,7 +22,8 @@ namespace Technology.Controllers
                     ["reversed_string"] = result,
                     ["details"] = JsonSerializer.SerializeToNode(StringReverses.CountLetters(result)),
                     ["longest_substring"] = StringReverses.LongestSubstring(result),
-                    ["sorted_string"] = StringReverses.Sort(result, sortType)
+                    ["sorted_string"] = StringReverses.Sort(result, sortType),
+                    ["truncate_string"] = TruncateString.Truncate(result)
                 };
                 return Ok(json);
             }
