@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,24 @@ namespace Technology.Service
                 return Even(str);
             else
                 return Odd(str);
+        }
+
+        public static (string, Dictionary<char, int>) StringDetails(string input)
+        {
+            return (ReverseByLenght(input), CountLetters(input));
+        }
+
+        public static Dictionary<char, int> CountLetters(string str)
+        {
+            Dictionary<char, int> letters = new Dictionary<char, int>();
+            foreach (char letter in str)
+            {
+                if (letters.ContainsKey(letter))
+                    letters[letter]++;
+                else
+                    letters.Add(letter, 1);
+            }
+            return letters;
         }
     }
 }
