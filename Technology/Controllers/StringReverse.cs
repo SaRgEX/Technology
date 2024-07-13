@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -9,7 +10,7 @@ using Technology.Service;
 namespace Technology.Controllers
 {
     [ApiController, Route("[controller]")]
-    public class StringReverse
+    public class StringReverse : ControllerBase
     {
         [HttpPost]
         public IActionResult Post(string input)
@@ -17,13 +18,15 @@ namespace Technology.Controllers
             char[] count = Validation.WrongLetters(input).ToArray();
             if (count.Length == 0)
             {
-                (string, Dictionary<char, int>) result = StringReverses.StringDetails(input);
-                string dictionary = result.Item2
-                    .Select(x => $"{x.Key}: {x.Value}")
-                    .Aggregate((x, y) => x + "\n" + y);
-                return new OkObjectResult(result.Item1 + "\n" + dictionary);
+                string result = StringReverses.ReverseByLenght(input);
+                JsonObject json = new JsonObject()
+                {
+                    ["reversed_string"] = result,
+                    ["details"] = JsonSerializer.SerializeToNode(StringReverses.CountLetters(result)),
+                };
+                return Ok(json);
             }
-            return new BadRequestObjectResult("Wrong letters: " + new string(count));
+            return BadRequest(new JsonObject() { ["Wrong letters"] = new string(count) });
         }
     }
 }

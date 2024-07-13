@@ -3,7 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Technology.Service
 {
@@ -30,20 +33,15 @@ namespace Technology.Service
                 return Odd(str);
         }
 
-        public static (string, Dictionary<char, int>) StringDetails(string input)
+        public static Dictionary<string, int> CountLetters(string str)
         {
-            return (ReverseByLenght(input), CountLetters(input));
-        }
-
-        public static Dictionary<char, int> CountLetters(string str)
-        {
-            Dictionary<char, int> letters = new Dictionary<char, int>();
+            Dictionary<string, int> letters = new Dictionary<string, int>();
             foreach (char letter in str)
             {
-                if (letters.ContainsKey(letter))
-                    letters[letter]++;
+                if (letters.ContainsKey(letter.ToString()))
+                    letters[letter.ToString()]++;
                 else
-                    letters.Add(letter, 1);
+                    letters.Add(letter.ToString(), 1);
             }
             return letters;
         }
