@@ -15,6 +15,11 @@ namespace Technology.Service
     public static class StringReverses
     {
         public static bool IsEven(this int number) => number % 2 == 0;
+        public static Dictionary<string, Sort> sortMethods = new()
+        {
+            ["quick"] = QuickSort.Sort,
+            ["tree"] = TreeSort.Sort
+        };
         public static string Even(string origin)
         {
             string firstPart = origin[..(origin.Length / 2)];
@@ -56,15 +61,9 @@ namespace Technology.Service
 
         public static string Sort(string origin, string type)
         {
-            if (!SortMethods.ContainsKey(type))
+            if (!sortMethods.ContainsKey(type))
                 throw new Exception("Invalid sort type");
-            return SortMethods[type](origin);
+            return sortMethods[type](origin);
         }
-
-        public static Dictionary<string, Sort> SortMethods = new()
-        {
-            ["quick"] = QuickSort.Sort,
-            ["tree"] = TreeSort.Sort
-        };
     }
 }
