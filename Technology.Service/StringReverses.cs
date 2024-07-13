@@ -45,5 +45,11 @@ namespace Technology.Service
             }
             return letters;
         }
+
+        public static string LongestSubstring(string str)
+        {
+            Regex regex = new Regex(@"[aeiou].*[aeiou]");
+            return regex.Match(str).Value;
+        }
     }
 }

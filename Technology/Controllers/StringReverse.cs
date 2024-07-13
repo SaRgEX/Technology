@@ -23,6 +23,7 @@ namespace Technology.Controllers
                 {
                     ["reversed_string"] = result,
                     ["details"] = JsonSerializer.SerializeToNode(StringReverses.CountLetters(result)),
+                    ["longest_substring"] = StringReverses.LongestSubstring(result),
                 };
                 return Ok(json);
             }
