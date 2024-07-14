@@ -1,4 +1,5 @@
 ﻿using Technology.Controllers;
+using Technology.Middleware;
 using Technology.Service.Randoms;
 
 namespace Technology
@@ -12,6 +13,7 @@ namespace Technology
                 x => new RandomClient(configuration["RandomApi"]));
             services.AddTransient<ICollection<string>>(
                 x => configuration.GetSection("Settings:BlackList").Get<HashSet<string>>() ?? new());
+            RequestLimit.MaxCount = configuration.GetValue<int>("Settings:ParallelLimit");
         }
     }
 }
