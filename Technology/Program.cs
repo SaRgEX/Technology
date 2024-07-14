@@ -1,7 +1,7 @@
 using System.Reflection;
+using Technology;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFile));
 });
+Config.AddConfig(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 

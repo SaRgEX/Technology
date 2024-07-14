@@ -5,12 +5,17 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Technology.Service
+namespace Technology.Service.Randoms
 {
-    public static class RandomGenerator
+    public class RandomClient
     {
-        const string url = "http://www.randomnumberapi.com/api/v1.0/random?max=";
-        public static async Task<int> RandomApi(int length)
+        private readonly string? url;
+        public RandomClient(string url)
+        {
+            this.url = url;
+        }
+
+        public async Task<int> RandomNumber(int length)
         {
             using HttpClient client = new();
             HttpResponseMessage response;
@@ -30,6 +35,5 @@ namespace Technology.Service
             }
             return -1;
         }
-        public static int RandomNumberByLenght(int lenght) => new Random().Next(lenght - 1);
     }
 }

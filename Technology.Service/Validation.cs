@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Technology.Service
 {
-    public static class Validation
+    public class Validation
     {
         public static IEnumerable<char> WrongLetters (string input)
         {
@@ -16,5 +16,6 @@ namespace Technology.Service
                     yield return letter;
             }
         }
+
     }
 }

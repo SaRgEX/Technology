@@ -7,17 +7,18 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Technology.Service.Randoms;
 
 namespace Technology.Service
 {
     public class TruncateString
     {
-        public static string Truncate(string origin)
+        public static string Truncate(string origin, RandomClient randomClient)
         {
-            int result = RandomGenerator.RandomApi(origin.Length).Result;
+            int result = randomClient.RandomNumber(origin.Length).Result;
             if (result != -1)
                 return origin.Remove(result, 1);
-            result = RandomGenerator.RandomNumberByLenght(origin.Length);
+            result = new Random().Next(origin.Length);
             return origin.Remove(result, 1);
         }
     }
