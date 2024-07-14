@@ -1,5 +1,6 @@
 using System.Reflection;
 using Technology;
+using Technology.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -20,6 +21,8 @@ builder.Services.AddSwaggerGen(options =>
 Config.AddConfig(builder.Services, builder.Configuration);
 
 var app = builder.Build();
+
+app.UseMiddleware<RequestLimit>();
 
 if (app.Environment.IsDevelopment())
 {
